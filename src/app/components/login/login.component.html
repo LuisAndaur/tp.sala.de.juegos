@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="wrapper fadeInDown">
+      <div id="formContent">
+
+        <div class="botones">
+            <h2 class="active"> Iniciar Sesion </h2>
+            <h2 class="inactive underlineHover" routerLink="/registro">Registrarse</h2>
+        </div>
+
+        <div class="fadeIn first">
+          <img src="../../../assets/astronave.png" id="icon" alt="User Icon" />
+        </div>
+
+        <form [formGroup]="form" class="form" (ngSubmit)="enviarForm()">
+          <!-- CORREO -->
+              <div class="form-floating mt-3">
+                <input type="email" class="form-control" id="floatingCorreo" placeholder="Correo electrónico" formControlName="correo">
+              </div>
+              <small *ngIf="correo?.hasError('email')" class="invalid">
+                <i class="bi bi-exclamation-octagon"></i> Correo inválido
+              </small>
+
+             <!-- CLAVE -->
+              <div class="form-floating mt-3">
+                <input type="password" class="form-control" id="floatingClave" placeholder="Clave" formControlName="clave">
+              </div>
+              <small *ngIf="clave?.hasError('minlength')" class="invalid">
+                <i class="bi bi-exclamation-octagon"></i> minímo {{clave?.getError('minlength')?.requiredLength}} caracteres
+              </small>
+
+          <div class="row">
+            <div class="col-md-12 botonesIngreso">
+              <button type="submit" class="btn btn-outline-info py-3 mt-3 botonEntrar" [disabled]="!form.valid">
+                <strong>Entrar</strong>
+              </button>
+              <button type="button" class="btn btn-outline-primary py-3 mt-3 botonRapido" (click)="completarDatos()">Acceso rápido</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+</div>

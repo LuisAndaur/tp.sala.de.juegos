@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
+h4{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: gold;
+  font-weight: 700;
+}
+
+h3{
+  color: aqua;
+  font-weight: 400;
+}
+
+.main-profile {
+  border-radius: 23px;
+  padding: 30px;
+  background-color: #507fffa8;
+}
+
+.main-profile .main-info span {
+  font-size: 14px;
+  color: #4d4d4d;
+  background-color: gold;
+  padding: 8px 20px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 400;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.main-profile .main-info h4 {
+  margin-bottom: 20px;
+}
+
+.main-profile .main-info .main-border-button {
+  margin-top: 25px;
+}
+
+.main-profile ul {
+  border-radius: 23px;
+  padding: 30px;
+  background-color: #3d65d3c4;
+}
+
+.main-profile ul li {
+  width: 100%;
+  font-size: 14px;
+  color: aqua;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid aqua;
+}
+
+.main-profile ul li span {
+  float: right;
+  font-weight: 500;
+  color: gold;
+}
+
+.main-profile ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.clips {
+  margin-top: 30px;
+  border-top: 2px solid #27292a;
+}
+
+.clips .heading-section {
+  margin-top: 30px;
+}
+
+.clips .item  {
+  border-radius: 23px;
+  padding: 30px 15px;
+  background-color: #27292a;
+  margin-bottom: 30px;
+}
+
+.clips .item .thumb {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.clips .item .thumb a {
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-23px, -23px);
+    width: 46px;
+    height: 46px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 46px;
+    color: #ec6090;
+}
+
+.clips .item h4 {
+  font-size: 15px;
+  display: inline-block;
+}
+
+.clips .item span i {
+  color: #ec6090;
+}
+
+.clips .item span {
+  float: right;
+  color: #fff;
+  font-size: 14px;
+}
+
+.clips .main-button {
+  margin-top: 10px;
+  text-align: center;
+}

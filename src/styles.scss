@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*{
+  font-family: 'Press Start 2P';
+}
+
+body{
+
+    background: url("./assets/home-bg.jpg")
+     no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Press Start 2P'; }
