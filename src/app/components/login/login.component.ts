@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UsuarioIngreso } from 'src/app/models/usuario-ingreso.models';
-import { AuthService } from 'src/app/services/auth.service';
-import { LoaderService } from 'src/app/services/loader.service';
-import { RegistroIngresoService } from 'src/app/services/registro-ingreso.service';
+import { AuthService } from '../../services/auth.service';
+import { LoaderService } from '../../services/loader.service';
+import { RegistroIngresoService } from '../../services/registro-ingreso.service';
 
 @Component({
   selector: 'app-login',
@@ -36,28 +35,25 @@ export class LoginComponent implements OnInit {
   }
 
   enviarForm(): void {
-    // this.loaderServicio.setCargando(true);
+    this.loaderService.setCargando(true);
     this.auth
       .login(this.correo?.value, this.clave?.value)
       .then(() => {
-        const usuarioIngreso = new UsuarioIngreso();
-        usuarioIngreso.correo = this.correo?.value;
-        usuarioIngreso.fecha = new Date();
 
-        this.registroIngreso
-          .setIngreso(usuarioIngreso)
+        this.registroIngreso.setIngreso(this.correo?.value)
           .then(() => {
-            this.toast.success('Se guardo la fecha del ingreso', 'Exito');
+            this.toast.success('Ingreso registrado', 'Exito');
           })
           .catch((error: Error) => {
             debugger;
             this.toast.warning(
-              'No se pudo guardar la fecha del ingreso',
+              'No se registro el ingreso',
               'Información'
             );
           });
         this.toast.success('Acceso concedido', 'Bienvenido');
         this.router.navigateByUrl('/home');
+
       })
       .catch((error) => {
         switch (error.code) {
@@ -78,7 +74,7 @@ export class LoginComponent implements OnInit {
       })
       .finally(() => {
         this.form.reset();
-        // this.loaderService.setCargando(false);
+        this.loaderService.setCargando(false);
       });
   }
   get correo() {

@@ -1,61 +1,58 @@
 import { NgModule } from '@angular/core';
+
+//Modules
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { QuienSoyComponent } from './components/quien-soy/quien-soy.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './components/nav/nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-
-import { AngularFireModule, FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-
-import { environment } from 'src/environments/environment';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
-import { RegisterComponent } from './components/register/register.component';
+
+//Angular material
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+
+//Components
+import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { CommonModule } from '@angular/common';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+
+//Firebase
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+
+//Services
+// import { AuthService } from './services/auth.service';
+
+//Environment
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginComponent,
-    QuienSoyComponent,
-    NavComponent,
-    RegisterComponent,
     NotFoundComponent
+
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
 
-    provideFirebaseApp( () => initializeApp(environment.firebase)),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
 
     ToastrModule.forRoot({
-      timeOut: 5000,
+      timeOut: 2000,
       positionClass: 'toast-bottom-right',
       progressBar: true,
       closeButton: true,
@@ -66,7 +63,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     MatSliderModule,
     MatButtonModule,
   ],
-  providers: [],
+  exports: [RouterModule],
+  providers: [  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

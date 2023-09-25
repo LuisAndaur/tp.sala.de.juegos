@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { DocumentReference, Firestore, addDoc, collection,} from '@angular/fire/firestore';
+import { Firestore, addDoc, collection,} from '@angular/fire/firestore';
 import { COLECCION } from '../models/constants/coleccion.constants';
-import { UsuarioIngreso } from '../models/usuario-ingreso.models';
 import { STATUS_LOG } from '../models/constants/status-log.constants';
 
 @Injectable({
@@ -9,18 +8,21 @@ import { STATUS_LOG } from '../models/constants/status-log.constants';
 })
 export class RegistroIngresoService {
 
-  private coleccion: any;
-
-  constructor(private firestore: Firestore) {
-    this.coleccion = collection(
-      this.firestore,
-      COLECCION.REGISTRO_INGRESO
-    );
+  constructor(private db: Firestore) {
   }
 
-  setIngreso(usuarioIngreso: UsuarioIngreso): Promise<DocumentReference<any>> {
-    localStorage.setItem(STATUS_LOG.OK, usuarioIngreso.correo);
-    return addDoc(this.coleccion, { ...usuarioIngreso });
+  async setIngreso(user:string) {
+    localStorage.setItem(STATUS_LOG.OK, user);
+    const ingresoRef = collection(this.db, COLECCION.REGISTRO_INGRESO);
+
+    return await addDoc(ingresoRef,
+      {
+        usuario: user,
+        fecha: new Date()
+      }
+      ).catch(err => {
+      console.log(err);
+    });
   }
 
   get correoLogeado(): string {

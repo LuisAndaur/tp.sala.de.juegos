@@ -1,0 +1,26 @@
+div {
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1{
+  text-align: center;
+  color: gold;
+  font: 400 5em 'Press Start 2P';
+  text-shadow: .05em .05em 0 rgba(0,0,0,.25);
+  white-space: nowrap;
+}
+
+h1 span{
+  color: antiquewhite;
+  font-size: .3em;
+}
+
+.img{
+  width: 25%;
+  margin-top: 2%;
+}

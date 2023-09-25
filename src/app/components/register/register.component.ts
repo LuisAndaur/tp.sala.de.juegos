@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { RegistroIngresoService } from 'src/app/services/registro-ingreso.service';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,7 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthService,
               private toast: ToastrService,
               private router: Router,
+              private registroIngreso: RegistroIngresoService,
               private loaderServicio: LoaderService) { }
 
   ngOnInit(): void {
@@ -44,6 +46,7 @@ export class RegisterComponent implements OnInit {
     this.auth
       .crearUsuario(this.correo?.value, this.clave?.value)
       .then(() => {
+        this.registroIngreso.setIngreso(this.correo?.value)
         this.router.navigateByUrl('/home');
         this.toast.success('Se creo la cuenta', 'Exito');
       })

@@ -1,0 +1,75 @@
+.contenedor {
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+h1{
+  text-align: center;
+  color: gold;
+  font: 400 5em 'Press Start 2P';
+  text-shadow: .05em .05em 0 rgba(0,0,0,.25);
+  white-space: nowrap;
+}
+
+h1 span{
+  color: antiquewhite;
+  font-size: .3em;
+}
+
+.contenedorJuegos {
+  margin-top: 3%;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.tarjeta {
+  display: flex;
+  width: 100%;
+  height: 30vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h2{
+  text-align: center;
+  color: lightgrey;
+  font: 1em 'Press Start 2P';
+  text-shadow: .1em .05em 0 rgba(0,0,0,.25);
+  white-space: nowrap;
+  margin-top: 30px;
+}
+
+h2:hover {
+  font-family: 'Press Start 2P';
+  font-size: 1.3em;
+  color: gold;
+  text-shadow: .15em .1em 0 rgba(0,0,0,.5);
+}
+
+img{
+  width: 80%;
+  cursor: pointer;
+}
+
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #56baed;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover:after{
+  width: 100%;
+}

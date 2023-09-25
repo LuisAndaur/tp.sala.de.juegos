@@ -19,25 +19,27 @@ export class NavComponent implements OnInit {
   constructor(private auth: AuthService,
               private toastr: ToastrService,
               private router: Router,
-              private loaderServicio: LoaderService,
+              private loaderService: LoaderService,
               private registroIngreso: RegistroIngresoService) { }
 
   ngOnInit(): void {
     if (this.registroIngreso.correoLogeado) {
       this.usuarioLogeado = true;
       this.correoLogeado = this.registroIngreso.correoLogeado;
-      console.log(this.correoLogeado,"if")
     }
-    this.auth.usuarioLogeado().subscribe((usuario) => {
-      this.usuarioLogeado = !!usuario;
-      this.correoLogeado = usuario?.email;
 
-      console.log(this.correoLogeado,"auth")
-    });
+    let log = this.auth.usuarioLogeado();
+    if(log != null){
+      this.usuarioLogeado = true;
+
+      let arr = this.correoLogeado.split('@');
+      this.correoLogeado = arr[0].toUpperCase();
+
+    }
   }
 
   cerrarSesion(): void {
-    this.loaderServicio.setCargando(true);
+    this.loaderService.setCargando(true);
     setTimeout(() => {
       this.auth
         .logout()
@@ -49,7 +51,7 @@ export class NavComponent implements OnInit {
           this.toastr.error(e.message, 'Ocurrio un error');
         })
         .finally(() => {
-          this.loaderServicio.setCargando(false);
+          this.loaderService.setCargando(false);
         });
     }, 750);
   }

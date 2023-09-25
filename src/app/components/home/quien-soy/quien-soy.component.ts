@@ -8,20 +8,20 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class QuienSoyComponent implements OnInit {
 
-  correoLogeado!: string;
+  correoLogeado!: any;
   user!: string;
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.auth.usuarioLogeado().subscribe((usuario) => {
-      this.correoLogeado = usuario?.email;
+    let user = this.auth.usuarioLogeado();
+    if(user != null){
+      this.correoLogeado = user.email;
 
       let arr = this.correoLogeado.split('@');
       this.user = arr[0].toUpperCase();
 
-      console.log(this.correoLogeado,"auth")
-    });
+    }
   }
 
 }
