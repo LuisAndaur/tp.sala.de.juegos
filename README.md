@@ -1,8 +1,7 @@
 # TpSalaDeJuegos
+[Deploy en netlify]( https://graceful-fenglisu-eca162.netlify.app/ )
 
 ### Sprint 1:
-
-[Deploy en netlify]( https://amazing-douhua-183ec8.netlify.app/ )
 
 - [x] Armado del proyecto
 - [x] Subido a Netlify o firebase.
