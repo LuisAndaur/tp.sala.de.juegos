@@ -1,0 +1,28 @@
+.maso {
+  width: 210px;
+  height: 320px;
+  position: relative;
+  perspective: 1000px;
+  border-radius: 1rem;
+  margin: 0 0.5rem 1.5rem 0.5rem;
+  overflow: hidden;
+  &:hover .carta {
+    transform: rotateY(180deg);
+  }
+}
+
+.carta {
+  transform-style: preserve-3d;
+  transition: all 1s linear;
+  &__cara {
+    position: absolute;
+    backface-visibility: hidden;
+    &.carta__cara--detras {
+      transform: rotateY(180deg);
+    }
+  }
+}
+
+.grow-2 {
+  transform: scale(2);
+}

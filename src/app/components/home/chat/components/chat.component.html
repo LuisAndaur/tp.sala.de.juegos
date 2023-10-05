@@ -1,0 +1,29 @@
+<section #chat class="chat seccion container">
+  <div >
+    <div *ngFor="let mensaje of mensajes"
+      [ngClass]="{'mensaje':true,'justify-content-end':mensaje.correo === this.correoLogeado}">
+      <p *ngIf="mensaje.correo === this.correoLogeado;else noSoyYo" class="mensaje info">
+        {{parserFecha(mensaje.fecha.seconds)}}
+      </p>
+      <ng-template #noSoyYo>
+        <p class="mensaje info">{{mensaje.correo}} -
+          {{parserFecha(mensaje.fecha.seconds)}}</p>
+      </ng-template>
+      <p class="mensaje texto">{{mensaje.mensaje}}</p>
+    </div>
+  </div>
+  <div class="footer height"></div>
+</section>
+<footer class="container footer">
+  <div class="w-100">
+    <div class="row ">
+      <div class="col-10">
+        <textarea [(ngModel)]="nuevoMensaje" class="textarea"></textarea>
+      </div>
+      <div class="col-2">
+        <button class="button" (click)="enviarMensaje()">Enviar</button>
+      </div>
+    </div>
+
+  </div>
+</footer>

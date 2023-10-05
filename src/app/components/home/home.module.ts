@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
 
 
-
 @NgModule({
   declarations: [
     HomeComponent,

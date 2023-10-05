@@ -1,0 +1,54 @@
+  <h2 class="titulo">AHORCADO</h2>
+
+  <div class="caja">
+
+    <div class="contenido">
+
+      <div class="letras">
+        <span *ngFor="let letra of abecedario" class="teclado-letra" (click)="elegir(letra)"
+          [ngClass]="{'teclado-letra--elegida': estaElegida(letra)}">{{letra}}</span>
+        <div class="teclado-letras" [ngClass]="{'teclado-letras perdiste':perdiste}"></div>
+
+        <div class="infoJuego">
+            <h2 class="subtitulo">Información del juego</h2>
+            <ul class="d-block ps-0">
+              <li class="">Intentos: {{intentos}}</li>
+              <li class="">Aciertos: {{aciertos}}</li>
+              <li class="">Reseteos: {{reseteos}}</li>
+              <li class="">Ayudas: {{ayudas}}</li>
+            </ul>
+        </div>
+      </div>
+
+      <div class="dibujo">
+        <img *ngIf="imagenes.length" [src]=imagenes[errores] alt="ahorcado">
+
+        <div *ngIf="palabraActual" class="container text-center" aria-label="palabra clave">
+
+          <div class="mb-3">
+            <span *ngFor="let letra of palabraActual.palabra.split('')" class="palabra-letra" (click)="elegir(letra)" [ngClass]="{'palabra-letra--acerto': esCorrecta(letra) }">
+              <ng-container *ngIf="esCorrecta(letra);else noEsCorrecta">{{letra}}</ng-container>
+              <ng-template #noEsCorrecta><span class="hidden">*</span></ng-template>
+            </span>
+          </div>
+
+          <div class="comentarios">
+            <p>
+              <span *ngIf="perdiste;else noPerdioAun">No te quedan mas intentos. <strong>¡ Perdiste !</strong></span>
+              <ng-template #noPerdioAun>
+                <span>Te queda<strong> {{intentosRestante}} </strong>intentos</span>
+              </ng-template>
+            </p>
+          </div>
+
+          <div class="btn-group mt-3">
+            <button type="button" class="btn btn-info" (click)="mostrarAyuda()"> Ayuda</button>
+            <button type="button" class="btn btn-danger" (click)="resetear()">Resetear</button>
+          </div>
+
+          <p class="alert bg-info mt-3 d-inline-block">TRUCO: click sobre la letra oculta y se revela!</p>
+
+        </div>
+      </div>
+    </div>
+  </div>

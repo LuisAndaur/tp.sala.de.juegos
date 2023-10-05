@@ -1,0 +1,61 @@
+<main class="container py-5">
+  <div class="d-flex justify-content-center align-items-center flex-column">
+    <div *ngIf="cartaActual" class="d-flex justify-content-center align-items-center">
+      <div class="row">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+          <div class="maso">
+
+            <div *ngIf="!mostrar" class="carta">
+              <div class="carta__cara carta__cara--detras">
+                <img [src]="cartaParaAdivinar.src">
+              </div>
+
+              <div class="carta__cara">
+                <img [src]="cartaReversa">
+              </div>
+            </div>
+
+            <div *ngIf="mostrar" >
+              <div class="carta__cara">
+                <img [src]="cartaParaAdivinar.src">
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+          <div class="maso">
+            <img [src]="cartaActual.src">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group my-4 grow-2">
+      <button type="button" class="btn btn-danger" (click)="adivinar('menor')"><i
+          class="bi bi-arrow-down-circle"></i></button>
+      <button type="button" class="btn btn-primary" (click)="adivinar('mayor')"><i
+          class="bi bi-arrow-up-circle"></i></button>
+    </div>
+
+    <div class="text-center">
+      <h3>Información del juego</h3>
+      <ul class="d-inline-block mb-2 ps-0">
+        <li class="d-inline-block ms-1">Rondas : {{rondas}},</li>
+        <li class="d-inline-block ms-1">Aciertos : {{aciertos}},</li>
+        <li class="d-inline-block ms-1">Salteadas : {{salteadas}}</li>
+      </ul>
+    </div>
+
+
+    <button type="button" *ngIf="rondas>0" class="btn btn-outline-medium  my-2" (click)="empezar()">Siguiente</button>
+    <button type="button" class="btn btn-outline-danger  my-2" (click)="saltear()">Saltear ronda</button>
+    <button type="button" class="btn btn-outline-primary  my-2" (click)="guardarPuntuacion()">Terminar</button>
+
+    <p class="alert bg-info mt-3">TRUCO: si se pasa el mouse sobre la carta, se puede ver!.</p>
+
+  </div>
+
+</main>

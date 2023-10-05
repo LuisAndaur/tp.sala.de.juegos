@@ -1,0 +1,134 @@
+.caja{
+  width: 100%;
+  height: 40vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.titulo{
+  text-align: center;
+  margin-top: 50px;
+  color: gold;
+  font: 4em "Press Start 2P";
+  text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.contenido{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letras{
+  width: 40%;
+  padding: 3%;
+}
+
+.dibujo{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.infoJuego{
+  margin: 20px 0;
+  padding: 10px;
+  background-color: gold;
+}
+
+img{
+  width: 16%;
+}
+
+.teclado-letras {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  // background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.perdiste {
+  position: absolute;
+  cursor: not-allowed;
+  // border: 0.1rem solid gold;
+}
+
+.teclado-letra {
+  display: inline-block;
+  min-width: 3.5rem;
+  padding: 1rem 0;
+  margin: 0.2rem;
+  text-align: center;
+  color: gold;
+  border: 0.1rem solid gold;
+  border-radius: 0.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: blue;
+
+  &--elegida {
+    color: white;
+    background-color: blueviolet;
+  }
+}
+
+.teclado-letra:hover {
+  color: rgb(160, 0, 160);
+  background-color: gold;
+}
+
+
+
+.palabra-letra {
+  display: inline-block;
+  min-width: 3.5rem;
+  padding: 1rem 0;
+  margin: 0.2rem;
+  text-align: center;
+  color: transparent;
+  border-bottom: 0.35rem solid gold;
+
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: blue;
+
+  &--acerto {
+    color: gold;
+  }
+}
+
+.grow-1-5 {
+  transform: scale(1.5);
+}
+
+.subtitulo{
+  text-align: center;
+  margin-top: 20px;
+  color: mediumvioletred;
+  font: 1.5em "Press Start 2P";
+  text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+
+.comentarios{
+  display: flex;
+  background-color: darkorange;
+  height: 40px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+p{
+  margin: 0;
+}

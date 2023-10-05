@@ -1,5 +1,5 @@
 # TpSalaDeJuegos
-[Deploy en netlify]( https://graceful-fenglisu-eca162.netlify.app/ )
+[Deploy en netlify]( https://sala-de-juegos-landaur.netlify.app/login )
 
 ### Sprint 1:
 
@@ -33,3 +33,18 @@
 - [x] Componente Registro
   - [x] Tiene que generar un nuevo usuario y redirigir al home al crearlo exitosamente, es decir, loguear al usuario automáticamente.
   - [x] Emitir mensaje si el usuario ya se encuentra registrado. (NO USAR ALERT)
+
+
+### Sprint 3
+
+- [x] Incorporar el chat.
+  - [x] Solamente usuarios logueados podrán acceder a la sala de chat.
+  - [x] Debemos marcar el usuario y hora que envió el mensaje.
+
+- [x] Incorporar módulos y loadchildren.
+
+- [x] Incorporar los juegos.
+  - [x] Ahorcado:
+    - [x] No se debe ingresar datos desde el teclado. Utilizar botones para el ingreso de las letras.
+  - [x] Mayor o Menor:
+    - [x] Desde un mazo de carta se va a preguntar si la siguiente es mayor o menor. El jugador sumará un punto ante cada carta que adivine.

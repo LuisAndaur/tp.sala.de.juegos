@@ -26,7 +26,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 //Services
-// import { AuthService } from './services/auth.service';
+import { AuthService } from './services/auth.service';
 
 //Environment
 import { environment } from 'src/environments/environment';
@@ -64,7 +64,7 @@ import { environment } from 'src/environments/environment';
     MatButtonModule,
   ],
   exports: [RouterModule],
-  providers: [  ],
+  providers: [ AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

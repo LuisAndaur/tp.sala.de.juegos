@@ -54,11 +54,6 @@ h2:hover {
   text-shadow: .15em .1em 0 rgba(0,0,0,.5);
 }
 
-img{
-  width: 80%;
-  cursor: pointer;
-}
-
 .underlineHover:after {
   display: block;
   left: 0;
@@ -72,4 +67,13 @@ img{
 
 .underlineHover:hover:after{
   width: 100%;
+}
+
+img{
+  width: 80%;
+  cursor: pointer;
+}
+
+.rotation{
+  transform: rotate(90deg);
 }

@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 
 h4{
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
   color: gold;
-  font-weight: 700;
+  font: 700 25px/28px Roboto, "Helvetica Neue", sans-serif;
 }
 
 h3{
-  color: aqua;
-  font-weight: 400;
+  margin-top: 10px;
+  color: black;
+  font: 600 20px/28px Roboto, "Helvetica Neue", sans-serif;
 }
 
 .main-profile {
