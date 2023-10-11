@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule} from '@angular/common/http'
 
 //Angular material
 import { MatRadioModule } from '@angular/material/radio';
@@ -30,13 +31,15 @@ import { AuthService } from './services/auth.service';
 
 //Environment
 import { environment } from 'src/environments/environment';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoaderComponent
 
   ],
   imports: [
@@ -46,6 +49,7 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
