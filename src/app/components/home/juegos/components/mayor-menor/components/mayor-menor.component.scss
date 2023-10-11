@@ -26,3 +26,66 @@
 .grow-2 {
   transform: scale(2);
 }
+
+.mas{
+  padding: 0 20px;
+  color: darkblue;
+  background-color: #fc00d2;
+}
+
+.menos{
+  padding: 0 20px;
+  color: #fc00d2;
+  background-color: darkblue;
+}
+
+.containerInfo{
+  display: flex;
+  background-color: blueviolet;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.info{
+  text-align: center;
+  margin-top: 50px;
+  color: gold;
+  font: 2em "Press Start 2P";
+  text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.lista{
+  margin: 20px 0;
+  text-align: initial;
+  color: darkblue;
+}
+
+li{
+  margin: 0 40px;
+}
+
+.botones{
+  margin: 20px 0;
+}
+
+.boton{
+  margin: 0 20px;
+  font-size: 1em;
+  background-color: darkviolet;
+}
+
+.boton:hover{
+  background-color: #fc00d2;
+}
+
+.alert{
+  margin: 0;
+  font-size: .8em;
+  color: blueviolet;
+}
+
+.alert:hover{
+  color: gray;
+}
