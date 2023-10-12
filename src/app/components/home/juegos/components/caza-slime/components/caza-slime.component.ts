@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { timeInterval } from 'rxjs';
+import { CazaSlimeService } from '../../../services/caza-slime.service';
 
 @Component({
   selector: 'app-caza-slime',
@@ -12,20 +13,34 @@ export class CazaSlimeComponent implements OnInit {
   display: Array<string> = [];
   interval: any;
   perdio: boolean = false;
-  tiempoMS: number = 1000;
+  tiempoMS: number = 2000;
   puntos: number = 0;
-  private email:any;
-  public highscore = '';
+  highscore = '';
 
-  constructor(private router:Router) {
+  constructor(private router:Router,
+              private cazaSlimeService: CazaSlimeService) {
 
   }
 
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.obtenerHighScore();
     this.display = new Array<string>(16);
     this.display.fill('hidden',0,16);
     this.interval = setInterval(()=>this.juego(), this.tiempoMS);
+  }
+
+  async obtenerHighScore()
+  {
+    await this.cazaSlimeService.getHighScore().then(numero=>
+    {
+      if(numero == undefined){
+        this.highscore = '0';
+      }
+      else{
+        this.highscore = JSON.stringify(numero);
+      }
+    });
   }
 
   juego()
@@ -43,10 +58,10 @@ export class CazaSlimeComponent implements OnInit {
     if(this.perdio)
     {
       clearInterval(this.interval);
-      // if(this.puntos > JSON.parse(this.highscore))
-      // {
-      //   this.firestorage.ModificarHighScore(<string>this.email, this.puntos, 'testvelocidad');
-      // }
+      if(this.puntos > JSON.parse(this.highscore))
+      {
+        this.cazaSlimeService.ModificarHighScore(this.puntos);
+      }
     }
     else
     {

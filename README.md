@@ -48,3 +48,23 @@
     - [x] No se debe ingresar datos desde el teclado. Utilizar botones para el ingreso de las letras.
   - [x] Mayor o Menor:
     - [x] Desde un mazo de carta se va a preguntar si la siguiente es mayor o menor. El jugador sumará un punto ante cada carta que adivine.
+
+
+# Sprint 4
+
+- [x] Agregar el juego Preguntados
+  - [x] Tiene que obtener las imágenes de una api.
+  - [x] Realizar el llamado a la api desde un Service.
+  - [x] Dar al jugador opciones de elección. No se puede ingresar datos por teclado.
+
+- [x] Juego propio
+  - [x] Realizar juego propio.
+    - [x] Juegos que no se pueden utilizar
+      - [x] TATETI
+      - [x] MEMOTEST
+      - [x] PIEDRA PAPEL O TIJERA
+
+- [x] Agregar descripción de su juego en la sección “Quién soy”. Debe contar con
+      información de qué juego es y cómo se juega.
+
+> Observación: Mi juego es "Caza-Slime".
