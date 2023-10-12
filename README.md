@@ -1,5 +1,5 @@
 # TpSalaDeJuegos
-[Deploy en netlify]( https://sala-de-juegos-landaur.netlify.app/login )
+[Deploy en netlify]( https://sala-de-juegos-landaur.netlify.app/ )
 
 ### Sprint 1:
 
