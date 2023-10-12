@@ -38,7 +38,7 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
   clickedElement: Subscription = new Subscription();
 
   btn_correspondiente: ElementRef<any>[] = [];
-  
+
   npreguntas: number[] = [];
 
   preguntas_hechas: number = 0;
@@ -71,20 +71,20 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
         this.listaPreguntas = p;
         // console.log("PREGUNTAS: ", this.listaPreguntas);
         this.escogerPreguntaAleatoria();
-        this.toastService.success('Preguntasdos OK', 'Bienvenido');
+        this.toastService.success('Preguntasdos OK', 'GO!');
 
       })
-      .catch((error:any) => {       
-          this.toastService.error('No se cargaron las preguntas!','Error');
+      .catch((error:any) => {
+          this.toastService.error('No se cargaron las preguntas!','ERROR');
         }
       )
       .finally(() => {
         this.loaderService.setCargando(false);
-      });      
+      });
   }
 
   ngAfterViewInit() {
-    
+
     this.btn_correspondiente = [
       this.btn1,
       this.btn2,
@@ -97,7 +97,7 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
     this.clickedElement = fromEvent(this.btn3.nativeElement, 'click').subscribe((x) => { this.cambiarEstilo(2) });
     this.clickedElement = fromEvent(this.btn4.nativeElement, 'click').subscribe((x) => { this.cambiarEstilo(3) });
   }
-  
+
 
   escogerPreguntaAleatoria() {
     let n;
@@ -106,7 +106,7 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       n = 0;
     }
-  
+
     while (this.npreguntas.includes(n)) {
       n++;
       if (n >= this.listaPreguntas.length) {
@@ -115,7 +115,7 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.npreguntas.length == this.listaPreguntas.length) {
         //Aquí es donde el juego se reinicia
         if (this.mostrar_pantalla_juego_términado) {
-          this.toastService.success("Puntuación: " + this.preguntas_correctas + "/" + (this.preguntas_hechas - 1), 'JUEGO TERMINADO');
+          this.toastService.success("Puntuación: " + this.preguntas_correctas + "/" + (this.preguntas_hechas - 1), 'JUEGO COMPLETO!');
         }
         if (this.reiniciar_puntos_al_reiniciar_el_juego) {
           this.preguntas_correctas = 0
@@ -126,15 +126,16 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.npreguntas.push(n);
     this.preguntas_hechas++;
-  
+
     this.escogerPregunta(n);
   }
-  
+
   escogerPregunta(n: number) {
     this.pregunta = this.listaPreguntas[n];
 
-    this.numero = n;    
+    this.numero = n;
     this.rondas = this.preguntas_hechas -1;
+    this.aciertos = this.preguntas_correctas;
 
     if (this.preguntas_hechas > 1) {
       this.puntaje = this.aciertos + "/" + (this.preguntas_hechas - 1);
@@ -142,12 +143,10 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
       this.puntaje = "";
     }
 
-    this.aciertos = this.preguntas_correctas;
-  
     this.desordenarRespuestas(this.pregunta);
 
   }
-  
+
   desordenarRespuestas(pregunta: IPregunta) {
     this.posibles_respuestas = [
       pregunta.respuesta,
@@ -156,15 +155,15 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
       pregunta.incorrecta3,
     ];
     this.posibles_respuestas.sort(() => Math.random() - 0.5);
-  
+
     this.r_btn1 = this.posibles_respuestas[0];
     this.r_btn2 = this.posibles_respuestas[1];
     this.r_btn3 = this.posibles_respuestas[2];
     this.r_btn4 = this.posibles_respuestas[3];
   }
 
-  cambiarEstilo(i: number){   
-    
+  cambiarEstilo(i: number){
+
     this.flag = true;
 
     if (this.suspender_botones) {
@@ -176,7 +175,7 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
       this.preguntas_correctas++;
 
       this.renderer.setStyle(this.btn_correspondiente[i].nativeElement, 'background', 'lightgreen');
-    } 
+    }
     else{
       this.renderer.setStyle(this.btn_correspondiente[i].nativeElement, 'background', 'pink');
     }
@@ -187,18 +186,23 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
     setTimeout(() => {
+      this.loaderService.setCargando(true);
+    }, 2000);
+
+    setTimeout(() => {
       this.reiniciar();
       this.suspender_botones = false;
+      this.loaderService.setCargando(false);
     }, 4000);
   }
-  
-  
+
+
   reiniciar() {
 
-    this.renderer.setStyle(this.btn1.nativeElement, 'background', 'white');
-    this.renderer.setStyle(this.btn2.nativeElement, 'background', 'white');
-    this.renderer.setStyle(this.btn3.nativeElement, 'background', 'white');
-    this.renderer.setStyle(this.btn4.nativeElement, 'background', 'white');
+    this.renderer.setStyle(this.btn1.nativeElement, 'background', 'snow');
+    this.renderer.setStyle(this.btn2.nativeElement, 'background', 'snow');
+    this.renderer.setStyle(this.btn3.nativeElement, 'background', 'snow');
+    this.renderer.setStyle(this.btn4.nativeElement, 'background', 'snow');
 
     this.escogerPreguntaAleatoria();
   }
@@ -209,20 +213,20 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
       this.preguntadosService
         .setPuntuacion(this.rondas, this.aciertos)
         .then(() => {
-          this.toastService.info('Se guardo la puntuación', 'Información');
+          this.toastService.info('Se guardo la puntuación', 'INFO');
           this.loaderService.setCargando(false);
           this.router.navigateByUrl('/home/juegos/');
         })
         .catch((error: Error) => {
-          this.toastService.error(error.message, 'Error');
+          this.toastService.error(error.message, 'ERROR');
         })
         .finally(() => {
           this.loaderService.setCargando(false);
         });
-    } 
+    }
     else {
       if(!this.flag) {
-        this.toastService.info('Jugar al menos una vez', 'Información');
+        this.toastService.info('Jugar al menos una vez', 'INFO');
       }
     }
   }
@@ -231,5 +235,5 @@ export class PreguntadosComponent implements OnInit, AfterViewInit, OnDestroy {
     // add this for performance reason
     this.clickedElement.unsubscribe();
   }
-  
+
 }

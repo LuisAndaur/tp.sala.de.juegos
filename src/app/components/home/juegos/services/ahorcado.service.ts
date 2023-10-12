@@ -65,10 +65,6 @@ export class AhorcadoService {
       COLECCION.AHORCADO
     );
 
-    let user = this.auth.usuarioLogeado();
-    if(user != null){
-      this.correoLogeado = user.email;
-    }
   }
 
   getPalabrasParaAdivinar(): Observable<Array<IAhorcado>> {
@@ -79,21 +75,25 @@ export class AhorcadoService {
     return of(this.imagenes);
   }
 
-  setPuntuacion(
-    intentos: number,
-    aciertos: number,
-    reseteos: number,
-    ayudas: number
-  ) {
-    const correo = this.correoLogeado;
+  setPuntuacion(intentos: number, aciertos: number, reseteos: number, pistas: number, ayudasUsadas: number) {
+
     const fecha = new Date();
+    let correo;
+    let user = this.auth.usuarioLogeado();
+
+    if(user != null){
+      this.correoLogeado = user.email;
+      correo = this.correoLogeado;
+    }
+
     return addDoc(this.coleccion, {
       fecha,
       correo,
       intentos,
       aciertos,
       reseteos,
-      ayudas,
+      pistas,
+      ayudasUsadas
     });
   }
 }

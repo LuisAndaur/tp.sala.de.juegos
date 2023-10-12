@@ -33,10 +33,6 @@ export class MayorMenorService {
       COLECCION.MAYOR_MENOR
     );
 
-    let user = this.auth.usuarioLogeado();
-    if(user != null){
-      this.correoLogeado = user.email;
-    }
   }
 
   getCartas(): Observable<Array<ICarta>> {
@@ -44,8 +40,16 @@ export class MayorMenorService {
   }
 
   setPuntuacion(rondas: number, aciertos: number, salteadas: number) {
-    const correo = this.correoLogeado;
+
     const fecha = new Date();
+    let correo;
+    let user = this.auth.usuarioLogeado();
+
+    if(user != null){
+      this.correoLogeado = user.email;
+      correo = this.correoLogeado;
+    }
+
     return addDoc(this.coleccion, {
       fecha,
       correo,

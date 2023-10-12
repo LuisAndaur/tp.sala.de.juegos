@@ -1,1 +1,23 @@
-<p>caza-slime works!</p>
+<h2 class="titulo">CAZA-SLIME</h2>
+
+<div class="contenedor">
+  <div class="divJuego">
+    <h3 class="info">Puntos: {{this.puntos}}</h3>
+    <h3 class="info">High score: {{this.highscore}}</h3>
+    <br>
+    <ng-container *ngFor="let letra of [].constructor(16); let i = index">
+      <button type="button" id="slime" (click)="clickBoton(i)"  style="visibility: {{display[i]}}; display:inline;"></button>
+        <br *ngIf="i==3 || i==7 || i==11">
+    </ng-container>
+  </div>
+
+  <div class="divPerdiste" *ngIf="this.perdio == true">
+    <div class="divMensaje">
+      <h4>¡PERDISTE!</h4>
+      <br>
+      <h4>Puntaje: {{this.puntos}} puntos</h4>
+      <br>
+      <input type="button" class="boton" value="Reintentar" (click)="recargarJuego()">
+    </div>
+  </div>
+</div>

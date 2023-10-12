@@ -3,6 +3,7 @@ import { IAhorcado } from '../../../interfaces/iahorcado'
 import { AhorcadoService } from '../../../services/ahorcado.service';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/services/loader.service';
+import { Router } from '@angular/router';
 
 const MAXIMO = 6;
 
@@ -13,6 +14,7 @@ const MAXIMO = 6;
 })
 export class AhorcadoComponent implements OnInit {
 
+  private flagSiJugo: boolean = false;
   private palabrasAhorcado: Array<IAhorcado> = [];
   private palabraQueSeEscribeTodo: Array<string> = [];
   private palabraQueSeEscribeCorrectamente: Array<string> = [];
@@ -47,22 +49,27 @@ export class AhorcadoComponent implements OnInit {
     'z',
   ];
   imagenes: Array<string> = [];
-  ayuda: boolean = false;
+  pista: boolean = false;
   intentos: number = 0;
   aciertos: number = 0;
   reseteos: number = 0;
-  ayudas: number = 0;
+  pistas: number = 0;
   errores: number = 0;
+  ayuda: number = 5;
+  ayudasUsadas: number = 0;
+  flagAyuda: boolean = true;
   perdiste: boolean = false;
   intentosRestante: number = MAXIMO;
 
   constructor(
     private ahorcadoServicio: AhorcadoService,
     private toastServicio: ToastrService,
-    private loaderServicio: LoaderService
+    private loaderServicio: LoaderService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.flagSiJugo = false;
     this.loaderServicio.setCargando(true);
     this.ahorcadoServicio.getPalabrasParaAdivinar().subscribe((palabras) => {
       this.palabrasAhorcado = palabras;
@@ -74,13 +81,11 @@ export class AhorcadoComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
-    this.guardarPuntuacion();
-  }
-
   elegir(letra: string) {
+
     if (!this.estaElegida(letra)) {
       this.palabraQueSeEscribeTodo.push(letra);
+
       if (this.estaContenida(letra)) {
         this.palabraQueSeEscribeCorrectamente.push(letra);
 
@@ -89,12 +94,15 @@ export class AhorcadoComponent implements OnInit {
           this.intentos++;
           this.toastServicio.success(
             `Adivinaste, era ${this.palabraActual.palabra}`,
-            'Ganaste'
+            'GENIAL!'
           );
+          this.flagSiJugo = true;
           this.empezar();
-        } else {
         }
-      } else {
+        else {
+        }
+      }
+      else {
         this.errores++;
         this.intentosRestante--;
         if (this.errores == MAXIMO) {
@@ -102,9 +110,66 @@ export class AhorcadoComponent implements OnInit {
           this.intentos++;
           this.toastServicio.error(
             `La palabra era ${this.palabraActual.palabra}`,
-            'Perdiste'
+            'PERDISTE!'
           );
-          // this.empezar();
+          this.flagSiJugo = true;
+          this.empezar();
+        }
+      }
+    }
+  }
+
+  elegirAyuda(letra: string) {
+
+    if(!this.tieneAyudas()){
+      this.toastServicio.info('No tiene más ayudas', 'AYUDA');
+      return;
+    }
+
+    if(!this.flagAyuda){
+      this.toastServicio.info('No tiene más ayudas este turno', 'AYUDA');
+      return;
+    }
+
+    this.flagAyuda = false;
+    this.ayuda--;
+    this.ayudasUsadas++;
+
+    if (!this.estaElegida(letra)) {
+      this.palabraQueSeEscribeTodo.push(letra);
+      console.log("ES LETRA: ", letra);
+      console.log("PALABRA TODO: ", this.palabraQueSeEscribeTodo);
+      if (this.estaContenida(letra)) {
+        this.palabraQueSeEscribeCorrectamente.push(letra);
+
+        console.log("ES LETRA: ", letra);
+      console.log("PALABRA CORR: ", this.palabraQueSeEscribeCorrectamente);
+
+        if (this.verificarSiAcerto()) {
+          this.aciertos++;
+          this.intentos++;
+          this.toastServicio.success(
+            `Adivinaste, era ${this.palabraActual.palabra}`,
+            'GENIAL!'
+          );
+          this.flagSiJugo = true;
+          this.empezar();
+        }
+        else {
+        }
+      }
+      else {
+        this.errores++;
+        this.intentosRestante--;
+        if (this.errores == MAXIMO) {
+          this.perdiste = true;
+          this.intentos++;
+          this.toastServicio.error(
+            `La palabra era ${this.palabraActual.palabra}`,
+            'PERDISTE!'
+          );
+          this.flagSiJugo = true;
+          this.empezar();
         }
       }
     }
@@ -138,12 +203,12 @@ export class AhorcadoComponent implements OnInit {
       .some((_letra) => letra == _letra);
   }
 
-  mostrarAyuda(): void {
-    if (this.ayuda == false) {
-      this.ayudas++;
+  mostrarPista(): void {
+    if (this.pista == false) {
+      this.pistas++;
     }
-    this.toastServicio.info(this.palabraActual.pista, 'Ayuda');
-    this.ayuda = true;
+    this.toastServicio.info(this.palabraActual.pista, 'PISTA');
+    this.pista = true;
   }
 
   resetear(): void {
@@ -151,37 +216,39 @@ export class AhorcadoComponent implements OnInit {
     this.empezar();
   }
 
-  guardarPuntuacion(bandera?: boolean): void {
+  guardarPuntuacion(): void {
     if (this.intentos > 0) {
       this.loaderServicio.setCargando(true);
       this.ahorcadoServicio
-        .setPuntuacion(this.intentos, this.aciertos, this.reseteos, this.ayudas)
+        .setPuntuacion(this.intentos, this.aciertos, this.reseteos, this.pistas, this.ayudasUsadas)
         .then(() => {
-          this.toastServicio.info('Se guardo la puntuación', 'Información');
+          this.toastServicio.info('Se guardo la puntuación', 'INFO');
+          this.router.navigateByUrl('/home/juegos/');
         })
         .catch((error: Error) => {
-          this.toastServicio.error(error.message, 'Error');
+          this.toastServicio.error(error.message, 'ERROR');
         })
         .finally(() => {
           this.loaderServicio.setCargando(false);
         });
     } else {
-      if (bandera) {
+      if (!this.flagSiJugo) {
         this.toastServicio.info(
           'Tienes que jugar al menos una vez',
-          'Información'
+          'INFO'
         );
       }
     }
   }
 
   private empezar(): void {
+    this.flagAyuda = true;
     this.perdiste = false;
     this.palabraQueSeEscribeCorrectamente = [];
     this.palabraQueSeEscribeTodo = [];
     this.errores = 0;
     this.intentosRestante = MAXIMO;
-    this.ayuda = false;
+    this.pista = false;
     this.palabraActual = this.palabraRandom();
   }
 
@@ -191,6 +258,16 @@ export class AhorcadoComponent implements OnInit {
 
   private palabraRandom(): IAhorcado {
     return this.palabrasAhorcado[this.numeroRandom()];
+  }
+
+  private tieneAyudas(){
+
+    let ayuda = false;
+
+    if(this.ayuda > 0)
+      ayuda = true;
+
+      return ayuda;
   }
 
 }

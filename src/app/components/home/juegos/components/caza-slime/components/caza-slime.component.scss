@@ -1,0 +1,119 @@
+.contenedor{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titulo{
+  text-align: center;
+  margin-top: 50px;
+  color: gold;
+  font: 4em "Press Start 2P";
+  text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.info{
+  text-align: start;
+  color: gold;
+  font: .5em "Press Start 2P";
+  text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.divJuego{
+  width: 80%;
+  font-size: 40px;
+  height: 650px;
+  text-align: center;
+  // border: 3px solid black;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.divPerdiste{
+  width: 500px;
+  text-align: center;
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 2;
+}
+
+.divMensaje{
+  display: flex;
+  padding: 10px 0;
+  width: 500px;
+  height: 149px;
+  border: 2px solid #4CAF50;
+  border-radius: 10px;
+  background-color: darkred;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+h4{
+  margin: 0;
+  text-align: start;
+  color: gold;
+  font: 1.2em "Press Start 2P";
+  text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.boton{
+  height: 65px;
+  width: 200px;
+  background-color: #4CAF50;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  color: darkblue;
+  transition: all .2s,box-shadow .08s ease-in;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+}
+
+.boton:hover{
+  background-color: darkblue;
+  color: #4CAF50;
+}
+
+.boton:focus{
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
+
+// .botonJuego{
+//   display:block;
+//   height: 100px;
+//   width: 100px;
+//   border-radius: 50%;
+//   background-color: rgb(50, 50, 110);
+//   border: 1px solid red;
+// }
+
+// .botonJuego{
+//   display:block;
+//   height: 100px;
+//   width: 100px;
+//   border-radius: 50%;
+//   background-color: rgb(50, 50, 110);
+//   border: 1px solid red;
+// }
+
+button {
+  border: none;
+  border-radius: 100px;
+  width: 100px;
+  height: 100px;
+}
+
+#slime {
+  background: url(../../../../../../../assets/juegos/slime_live.png) no-repeat;
+  background-size: 100px 100px;
+}
+
+#slime:active {
+  background: url(../../../../../../../assets/juegos/slime-dead.png) no-repeat;
+  background-size: 100px 100px;
+}

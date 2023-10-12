@@ -1,9 +1,9 @@
 <h2 class="titulo">PREGUNTADOS</h2>
 
 <div class="contenedor">
-    <div class="puntaje" id="puntaje">
+    <!-- <div class="puntaje" id="puntaje">
         <p>{{puntaje}}</p>
-    </div>
+    </div> -->
     <div class="encabezado">
       <div class="categoria" id="categoria">
         <p>Categoría: {{pregunta.categoria}}</p>
@@ -23,7 +23,16 @@
     <div class="btn" #btn2>{{r_btn2}}</div>
     <div class="btn" #btn3>{{r_btn3}}</div>
     <div class="btn" #btn4>{{r_btn4}}</div>
-    <br><hr>
-    <div class="btn" (click)="guardarInformacion()">Finalizar</div>
-    
+
+
+    <div class="containerInfo">
+      <div class="text-center">
+        <h3 class="info">Información del juego</h3>
+        <ul class="d-inline-block ms-1 lista">
+          <li class="d-inline-block ms-1">Rondas: {{rondas}}</li>
+          <li class="d-inline-block ms-1">Aciertos: {{aciertos}}</li>
+        </ul>
+        <div class="guardar" (click)="guardarInformacion()">Finalizar</div>
+      </div>
+
   </div>

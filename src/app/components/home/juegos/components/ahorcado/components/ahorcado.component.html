@@ -15,7 +15,8 @@
               <li class="">Intentos: {{intentos}}</li>
               <li class="">Aciertos: {{aciertos}}</li>
               <li class="">Reseteos: {{reseteos}}</li>
-              <li class="">Ayudas: {{ayudas}}</li>
+              <li class="">Pistas: {{pistas}}</li>
+              <li class="">Ayudas: {{ayuda}}</li>
             </ul>
         </div>
       </div>
@@ -26,7 +27,7 @@
         <div *ngIf="palabraActual" class="container text-center" aria-label="palabra clave">
 
           <div class="mb-3">
-            <span *ngFor="let letra of palabraActual.palabra.split('')" class="palabra-letra" (click)="elegir(letra)" [ngClass]="{'palabra-letra--acerto': esCorrecta(letra) }">
+            <span *ngFor="let letra of palabraActual.palabra.split('')" class="palabra-letra" (click)="elegirAyuda(letra)" [ngClass]="{'palabra-letra--acerto': esCorrecta(letra) }">
               <ng-container *ngIf="esCorrecta(letra);else noEsCorrecta">{{letra}}</ng-container>
               <ng-template #noEsCorrecta><span class="hidden">*</span></ng-template>
             </span>
@@ -42,11 +43,12 @@
           </div>
 
           <div class="btn-group mt-3">
-            <button type="button" class="btn btn-info" (click)="mostrarAyuda()"> Ayuda</button>
-            <button type="button" class="btn btn-danger" (click)="resetear()">Resetear</button>
+            <button type="button" class="btn ayuda" (click)="mostrarPista()">Pista</button>
+            <button type="button" class="btn reset" (click)="resetear()">Resetear</button>
+            <button type="button" class="btn terminar" (click)="guardarPuntuacion()">Terminar</button>
           </div>
 
-          <p class="alert bg-info mt-3 d-inline-block">TRUCO: click sobre la letra oculta y se revela!</p>
+          <p class="alert">TRUCO: click sobre la letra oculta y se revela!</p>
 
         </div>
       </div>

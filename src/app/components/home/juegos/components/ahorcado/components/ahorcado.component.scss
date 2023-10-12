@@ -17,19 +17,22 @@
 }
 
 .contenido{
+  width: 80%;
+  height: 60vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: rgba(215, 215, 250, 0.637);
+  justify-content: space-around;
+  background-color: darkblue;
+  border-radius: 10px;
 }
 
 .letras{
-  width: 40%;
-  padding: 3%;
+  width: 50%;
+  padding: 2%;
 }
 
 .dibujo{
-  width: 40%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +42,9 @@
 .infoJuego{
   margin: 20px 0;
   padding: 10px;
-  background-color: gold;
+  background-color: darkblue;
+  border: 1px solid gold;
+  border-radius: 5px;
 }
 
 img{
@@ -73,20 +78,18 @@ img{
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
-  background-color: blue;
+  background-color: darkblue;
 
   &--elegida {
-    color: white;
-    background-color: blueviolet;
+    color: darkblue;
+    background-color: grey;
   }
 }
 
 .teclado-letra:hover {
-  color: rgb(160, 0, 160);
+  color: darkblue;
   background-color: gold;
 }
-
-
 
 .palabra-letra {
   display: inline-block;
@@ -100,7 +103,7 @@ img{
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
-  background-color: blue;
+  background-color: darkblue;
 
   &--acerto {
     color: gold;
@@ -112,24 +115,54 @@ img{
 }
 
 .subtitulo{
-  text-align: center;
+  text-align: start;
   margin-top: 20px;
-  color: mediumvioletred;
-  font: 1.5em "Press Start 2P";
+  padding: 0 10px;
+  color: gold;
+  font: 1em "Press Start 2P";
   text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
   white-space: nowrap;
 }
 
+ul{
+  padding: 0 10px;
+  color: antiquewhite;
+  list-style: none;
+}
 
 .comentarios{
   display: flex;
-  background-color: darkorange;
+  background-color: goldenrod;
   height: 40px;
   justify-content: center;
-  align-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
-p{
-  margin: 0;
+.ayuda{
+  background-color: lightslategray;
+  color: darkblue;
+  border: 5px solid darkblue;
 }
+
+.reset{
+  background-color: darkred;
+  color: antiquewhite;
+  border: 5px solid darkblue;
+}
+
+.terminar{
+  background-color: darkcyan;
+  color: darkblue;
+  border: 5px solid darkblue;
+}
+
+.alert{
+  margin: 0;
+  font-size: .8em;
+  color: darkblue;
+}
+
+.alert:hover{
+  color: gray;
+}
+

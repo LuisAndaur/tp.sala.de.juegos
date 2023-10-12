@@ -11,7 +11,8 @@ import { COLECCION } from '../../../../models/constants/coleccion.constants';
 })
 export class PreguntadosService {
 
-  private url: string = '../../../../../assets/juegos/preguntados/base-preguntas.json';
+  // private url: string = '../../../../../assets/juegos/preguntados/base-preguntas.json';
+  private url: string = 'https://api-preguntados-production.up.railway.app/api/preguntas';
   private correoLogeado!: any;
   private coleccion: any;
 
@@ -21,11 +22,6 @@ export class PreguntadosService {
       this.firestore,
       COLECCION.PREGUNTADOS
     );
-
-    let user = this.auth.usuarioLogeado();
-    if(user != null){
-      this.correoLogeado = user.email;
-    }
   }
 
   async getPreguntas(): Promise<IPregunta[]> {
@@ -36,7 +32,12 @@ export class PreguntadosService {
   }
 
   setPuntuacion(rondas: number, aciertos: number) {
-    const correo = this.correoLogeado;
+    let correo;
+    let user = this.auth.usuarioLogeado();
+    if(user != null){
+      this.correoLogeado = user.email;
+      correo = this.correoLogeado;
+    }
     const fecha = new Date();
     return addDoc(this.coleccion, {
       fecha,

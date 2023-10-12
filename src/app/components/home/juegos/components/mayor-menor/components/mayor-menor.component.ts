@@ -3,6 +3,7 @@ import { MayorMenorService } from '../../../services/mayor-menor-service.service
 import { ICarta } from '../../../interfaces/icarta';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from '../../../../../../services/loader.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -23,7 +24,8 @@ export class MayorMenorComponent implements OnInit {
   constructor(
     private cartasServicio: MayorMenorService,
     private toastServicio: ToastrService,
-    private loaderServicio: LoaderService
+    private loaderServicio: LoaderService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,17 +42,17 @@ export class MayorMenorComponent implements OnInit {
     this.rondas++;
     if (queES == 'mayor') {
       if (this.cartaActual.numero < this.cartaParaAdivinar.numero) {
-        this.toastServicio.success(`Sumaste 1 punto`, 'Adivinaste');
+        this.toastServicio.success(`Sumaste 1 punto`, 'GENIAL!');
         this.aciertos++;
       } else {
-        this.toastServicio.info(`Era MENOR!`, 'Información');
+        this.toastServicio.error(`Era MENOR!`, 'ERROR');
       }
     } else {
       if (this.cartaActual.numero > this.cartaParaAdivinar.numero) {
-        this.toastServicio.success(`Sumaste 1 punto`, 'Adivinaste');
+        this.toastServicio.success(`Sumaste 1 punto`, 'GENIAL!');
         this.aciertos++;
       } else {
-        this.toastServicio.info(`Era MAYOR`, 'Información');
+        this.toastServicio.error(`Era MAYOR`, 'ERROR');
       }
     }
     // this.empezar();
@@ -64,16 +66,17 @@ export class MayorMenorComponent implements OnInit {
         .setPuntuacion(this.rondas, this.aciertos, this.salteadas)
         .then(() => {
           console.log("GUARDADO");
-          this.toastServicio.info('Se guardo la puntuación', 'Información');
+          this.toastServicio.info('Se guardo la puntuación', 'INFO');
+          this.router.navigateByUrl('/home/juegos/');
         })
         .catch((error: Error) => {
-          this.toastServicio.error(error.message, 'Error');
+          this.toastServicio.error(error.message, 'ERROR');
         })
         .finally(() => {
           this.loaderServicio.setCargando(false);
         });
     } else {
-      this.toastServicio.info('Tienes que jugar al menos una vez','Información');
+      this.toastServicio.info('Tienes que jugar al menos una vez','INFO');
     }
   }
 
